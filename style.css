@@ -1,15 +1,15 @@
 /* =========================================
-   1. المتغيرات والألوان (Cyberpunk Theme)
+   1. المتغيرات والألوان (Yuta Neon Theme)
    ========================================= */
 :root {
-    --bg-dark: #0f172a;       /* كحلي غامق */
+    --bg-dark: #0f172a;       /* كحلي غامق جداً */
     --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
     
     --neon-pink: #f472b6;     /* وردي */
     --neon-blue: #38bdf8;     /* سماوي */
     --neon-purple: #a855f7;   /* بنفسجي */
     
-    --glass: rgba(255, 255, 255, 0.05);
+    --glass: rgba(255, 255, 255, 0.05); /* زجاج خفيف للبطاقات */
     --border: rgba(255, 255, 255, 0.1);
     
     --font-heading: 'El Messiri', sans-serif;
@@ -28,7 +28,7 @@ body {
 }
 
 /* =========================================
-   2. الفقاعات الخلفية
+   2. الفقاعات الخلفية (كما في الصورة)
    ========================================= */
 .bubbles-container {
     position: fixed;
@@ -51,7 +51,7 @@ body {
 }
 
 /* =========================================
-   3. القائمة العلوية
+   3. القائمة العلوية (الكبسولة الزجاجية)
    ========================================= */
 header {
     position: fixed;
@@ -61,7 +61,7 @@ header {
 }
 
 .glass-nav {
-    background: rgba(15, 23, 42, 0.85);
+    background: rgba(15, 23, 42, 0.85); /* شفافية غامقة */
     backdrop-filter: blur(15px);
     padding: 15px 30px;
     border-radius: 50px;
@@ -77,6 +77,7 @@ header {
     font-size: 1.5rem;
     font-weight: bold;
     color: #fff;
+    letter-spacing: 1px;
 }
 
 .nav-links { display: flex; gap: 20px; }
@@ -92,18 +93,7 @@ header {
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 120px 20px 50px; /* مسافة من الأعلى عشان القائمة */
-}
-
-/* حركة الظهور الفورية للنصوص العلوية */
-.hero-content {
-    animation: fadeInUp 1s ease-out forwards;
-    opacity: 0; /* يبدأ مخفي ويظهر بالأنيميشن */
-}
-
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+    padding: 120px 20px 50px;
 }
 
 .badge-glow {
@@ -131,17 +121,16 @@ header {
     -webkit-text-fill-color: transparent;
 }
 
-/* تنسيق النص المتحرك */
+/* النص المتحرك */
 .type-effect {
     font-size: 1.5rem;
     color: #94a3b8;
     margin-bottom: 40px;
-    min-height: 1.6em; /* حجز مكان للنص عشان ما ينط */
+    min-height: 1.6em; 
     font-weight: bold;
     display: block;
 }
-
-/* مؤشر الكتابة */
+/* وميض المؤشر */
 .type-effect::after {
     content: '|';
     color: var(--neon-pink);
@@ -176,7 +165,7 @@ header {
 .btn-secondary:hover { border-color: var(--neon-blue); color: var(--neon-blue); }
 
 /* =========================================
-   5. البطاقات (الظهور عند السكرول)
+   5. البطاقات (مطابقة للصورة)
    ========================================= */
 .section { padding: 100px 5%; }
 .section-title {
@@ -193,43 +182,34 @@ header {
     gap: 30px;
 }
 
+/* تصميم البطاقة الزجاجي كما في الصورة */
 .card {
     background: var(--glass);
-    padding: 40px 30px;
+    padding: 50px 30px;
     border-radius: 20px;
     border: 1px solid var(--border);
     text-align: center;
     transition: transform 0.1s;
     transform-style: preserve-3d;
-    
-    /* إعدادات السكرول */
-    opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-/* الكلاس الذي سيضيفه الجافاسكربت لإظهار البطاقة */
-.card.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
+/* الأيقونات المتدرجة */
 .icon-box {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
+    font-size: 3rem;
+    margin-bottom: 25px;
     background: linear-gradient(to bottom, var(--neon-blue), var(--neon-purple));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    display: inline-block;
 }
 
-.card h3 { font-family: var(--font-heading); margin-bottom: 15px; font-size: 1.4rem; }
-.card p { color: #94a3b8; }
+.card h3 { font-family: var(--font-heading); margin-bottom: 15px; font-size: 1.5rem; }
+.card p { color: #94a3b8; font-size: 0.95rem; }
 
 /* =========================================
-   6. API Section
+   6. API Section (للمطورين)
    ========================================= */
-.api-wrapper { max-width: 800px; margin: 0 auto; opacity: 0; transform: translateY(50px); transition: 1s; }
-.api-wrapper.visible { opacity: 1; transform: translateY(0); }
+.api-wrapper { max-width: 800px; margin: 0 auto; }
 
 .api-card {
     background: #000;
@@ -283,9 +263,7 @@ header {
     max-width: 600px;
     margin: 0 auto;
     border: 1px solid var(--border);
-    opacity: 0; transform: translateY(50px); transition: 1s;
 }
-.dev-card.visible { opacity: 1; transform: translateY(0); }
 
 .profile-glow {
     width: 100px; height: 100px;
@@ -311,6 +289,27 @@ header {
 footer { text-align: center; padding: 40px; color: #666; margin-top: 50px; }
 footer i { color: var(--neon-pink); animation: pulse 1s infinite; }
 @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
+
+/* =========================================
+   ⚠️ الإصلاح النهائي: إظهار العناصر دائماً
+   ========================================= */
+
+/* إجبار العناصر على الظهور فوراً لمنع مشاكل الاختفاء */
+.reveal, .card, .api-wrapper, .dev-card, .hero-content, header {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    visibility: visible !important;
+}
+
+/* حركة دخول بسيطة للهيرو فقط عند التحميل */
+.hero-content {
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
 /* الموبايل */
 @media (max-width: 768px) {
