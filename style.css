@@ -3,12 +3,12 @@
    ========================================= */
 :root {
     --bg-color: #050505;        /* أسود عميق */
-    --card-bg: #111111;         /* رمادي داكن جداً للبطاقات */
-    --text-color: #e0e0e0;      /* أبيض مريح للعين */
-    --accent-color: #9d4edd;    /* اللون البنفسجي الأساسي (طاقة يوتا) */
-    --accent-glow: rgba(157, 78, 221, 0.4); /* توهج بنفسجي */
-    --code-bg: #1e1e1e;         /* خلفية الأكواد */
-    --success: #00e676;         /* لون النجاح (للـ GET) */
+    --card-bg: #111111;         /* رمادي داكن للبطاقات */
+    --text-color: #e0e0e0;      /* أبيض مريح */
+    --accent-color: #9d4edd;    /* البنفسجي (طاقة يوتا) */
+    --accent-glow: rgba(157, 78, 221, 0.4);
+    --code-bg: #1e1e1e;
+    --success: #00e676;
     --font-main: 'Tajawal', sans-serif;
     --font-code: 'Fira Code', monospace;
 }
@@ -30,7 +30,7 @@ body {
     color: var(--text-color);
     font-family: var(--font-main);
     line-height: 1.6;
-    overflow-x: hidden;
+    overflow-x: hidden; /* لمنع التمرير الجانبي */
 }
 
 /* =========================================
@@ -44,8 +44,8 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(5, 5, 5, 0.85); /* خلفية نصف شفافة */
-    backdrop-filter: blur(10px);      /* تأثير الزجاج */
+    background: rgba(5, 5, 5, 0.85);
+    backdrop-filter: blur(10px);
     z-index: 1000;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -75,7 +75,6 @@ header {
     color: var(--accent-color);
 }
 
-/* تأثير خط تحت الروابط عند التمرير */
 .nav-links a::after {
     content: '';
     position: absolute;
@@ -100,7 +99,6 @@ header {
     justify-content: center;
     align-items: center;
     text-align: center;
-    /* تدرج لوني غامض في الخلفية */
     background: radial-gradient(circle at 50% 50%, #1a0b2e 0%, var(--bg-color) 70%);
     padding: 0 20px;
 }
@@ -109,6 +107,7 @@ header {
     font-size: 4rem;
     margin-bottom: 20px;
     color: #fff;
+    direction: ltr; /* للأكواد والنصوص الإنجليزية */
 }
 
 .highlight {
@@ -123,7 +122,6 @@ header {
     min-height: 24px;
 }
 
-/* الأزرار */
 .buttons {
     display: flex;
     gap: 20px;
@@ -140,7 +138,6 @@ header {
     transition: all 0.3s ease;
 }
 
-/* الزر الأساسي */
 .btn:not(.btn-outline) {
     background: var(--accent-color);
     color: #fff;
@@ -152,7 +149,6 @@ header {
     box-shadow: 0 0 25px rgba(157, 78, 221, 0.8);
 }
 
-/* زر الـ Outline */
 .btn-outline {
     background: transparent;
     border: 2px solid var(--accent-color);
@@ -166,20 +162,22 @@ header {
 }
 
 /* =========================================
-   4. قسم المميزات (Features)
+   4. قسم المميزات (تم الإصلاح هنا)
    ========================================= */
 .section {
     padding: 80px 8%;
 }
 
+/* إصلاح مشكلة العنوان المختفي */
 .section-title {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 50px;
     position: relative;
-    display: inline-block;
-    left: 50%;
-    transform: translateX(-50%);
+    /* الطريقة الآمنة للتوسط بدلاً من left/transform */
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .section-title::after {
@@ -192,10 +190,13 @@ header {
     border-radius: 2px;
 }
 
+/* تحسين الشبكة لتستوعب العدد الجديد */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* تجعل العناصر تأخذ مساحة متساوية وتلتف تلقائياً */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
+    justify-content: center;
 }
 
 .feature-card {
@@ -205,6 +206,10 @@ header {
     text-align: center;
     border: 1px solid rgba(255, 255, 255, 0.05);
     transition: 0.3s;
+    /* لجعل البطاقات بنفس الطول */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .feature-card:hover {
@@ -226,13 +231,14 @@ header {
 
 .feature-card p {
     color: #888;
+    line-height: 1.7;
 }
 
 /* =========================================
-   5. قسم الـ APIs (التصميم البرمجي)
+   5. قسم الـ APIs
    ========================================= */
 .dark-section {
-    background-color: #020202; /* أغمق قليلاً من الخلفية العادية */
+    background-color: #020202;
 }
 
 .api-container {
@@ -279,6 +285,7 @@ header {
     color: #fff;
     font-weight: bold;
     font-size: 1.1rem;
+    direction: ltr; /* ليظهر الرابط بشكل صحيح */
 }
 
 .api-desc {
@@ -295,8 +302,9 @@ header {
     justify-content: space-between;
     align-items: center;
     font-family: var(--font-code);
-    color: #fab1a0; /* لون برتقالي فاتح للكود */
+    color: #fab1a0;
     border: 1px solid #333;
+    direction: ltr; /* الكود دائماً من اليسار لليمين */
 }
 
 .code-block code {
@@ -305,7 +313,6 @@ header {
     padding-bottom: 2px;
 }
 
-/* تخصيص شريط التمرير للكود */
 .code-block code::-webkit-scrollbar {
     height: 4px;
 }
@@ -319,7 +326,7 @@ header {
     color: #888;
     cursor: pointer;
     font-size: 1.2rem;
-    margin-right: 15px; /* مسافة بسبب RTL */
+    margin-left: 15px;
     transition: color 0.3s;
 }
 
@@ -328,7 +335,7 @@ header {
 }
 
 /* =========================================
-   6. قسم المطور والفوتر
+   6. المطور والفوتر والتجاوب
    ========================================= */
 .dev-card {
     background: linear-gradient(45deg, #111, #1a0b2e);
@@ -377,32 +384,22 @@ footer {
     margin-top: 50px;
 }
 
-/* =========================================
-   7. التجاوب مع الجوال (Mobile)
-   ========================================= */
+/* للجوال */
 @media (max-width: 768px) {
     header {
         padding: 15px 20px;
     }
-    
     .nav-links {
-        display: none; /* يمكن إضافة قائمة هامبرغر لاحقاً */
+        display: none;
     }
-
     .hero h1 {
         font-size: 2.5rem;
     }
-
-    .grid-container {
-        grid-template-columns: 1fr;
-    }
-
     .code-block {
         flex-direction: column;
         gap: 10px;
-        align-items: flex-end; /* لمحاذاة زر النسخ */
+        align-items: flex-end;
     }
-    
     .code-block code {
         width: 100%;
     }
