@@ -1,15 +1,15 @@
 /* =========================================
-   1. المتغيرات والألوان (Yuta Neon Theme)
+   ألوان الفرفشة الداكنة (Neon Night Theme)
    ========================================= */
 :root {
     --bg-dark: #0f172a;       /* كحلي غامق جداً */
     --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
     
-    --neon-pink: #f472b6;     /* وردي */
-    --neon-blue: #38bdf8;     /* سماوي */
+    --neon-pink: #f472b6;     /* وردي فاقع */
+    --neon-blue: #38bdf8;     /* سماوي مشع */
     --neon-purple: #a855f7;   /* بنفسجي */
     
-    --glass: rgba(255, 255, 255, 0.05); /* زجاج خفيف للبطاقات */
+    --glass: rgba(255, 255, 255, 0.05);
     --border: rgba(255, 255, 255, 0.1);
     
     --font-heading: 'El Messiri', sans-serif;
@@ -27,9 +27,7 @@ body {
     min-height: 100vh;
 }
 
-/* =========================================
-   2. الفقاعات الخلفية (كما في الصورة)
-   ========================================= */
+/* فقاعات الخلفية */
 .bubbles-container {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -45,14 +43,12 @@ body {
     animation: rise 15s infinite ease-in;
 }
 @keyframes rise {
-    0% { bottom: -100px; transform: translateX(0); opacity: 0; }
-    50% { opacity: 0.5; transform: translateX(50px); }
-    100% { bottom: 100%; transform: translateX(-50px); opacity: 0; }
+    0% { bottom: -100px; transform: translateX(0); }
+    50% { transform: translateX(100px); }
+    100% { bottom: 100%; transform: translateX(-100px); }
 }
 
-/* =========================================
-   3. القائمة العلوية (الكبسولة الزجاجية)
-   ========================================= */
+/* القائمة الزجاجية */
 header {
     position: fixed;
     top: 20px; left: 50%; transform: translateX(-50%);
@@ -61,7 +57,7 @@ header {
 }
 
 .glass-nav {
-    background: rgba(15, 23, 42, 0.85); /* شفافية غامقة */
+    background: rgba(15, 23, 42, 0.8);
     backdrop-filter: blur(15px);
     padding: 15px 30px;
     border-radius: 50px;
@@ -76,24 +72,26 @@ header {
     font-family: var(--font-heading);
     font-size: 1.5rem;
     font-weight: bold;
-    color: #fff;
     letter-spacing: 1px;
 }
 
 .nav-links { display: flex; gap: 20px; }
-.nav-links a { color: #cbd5e1; transition: 0.3s; font-weight: 500; }
+.nav-links a {
+    color: #cbd5e1;
+    transition: 0.3s;
+    font-weight: 500;
+}
 .nav-links a:hover { color: var(--neon-pink); text-shadow: 0 0 10px var(--neon-pink); }
 
-/* =========================================
-   4. الهيرو (الواجهة الرئيسية)
-   ========================================= */
+/* الهيرو */
 .hero {
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 120px 20px 50px;
+    padding: 0 20px;
+    margin-top: 50px; /* مسافة للقائمة */
 }
 
 .badge-glow {
@@ -105,7 +103,6 @@ header {
     margin-bottom: 20px;
     border: 1px solid rgba(168, 85, 247, 0.3);
     font-size: 0.9rem;
-    font-weight: bold;
 }
 
 .hero h1 {
@@ -121,22 +118,12 @@ header {
     -webkit-text-fill-color: transparent;
 }
 
-/* النص المتحرك */
 .type-effect {
     font-size: 1.5rem;
     color: #94a3b8;
     margin-bottom: 40px;
-    min-height: 1.6em; 
-    font-weight: bold;
-    display: block;
+    min-height: 30px;
 }
-/* وميض المؤشر */
-.type-effect::after {
-    content: '|';
-    color: var(--neon-pink);
-    animation: blink 0.7s infinite;
-}
-@keyframes blink { 50% { opacity: 0; } }
 
 .buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
 
@@ -155,6 +142,7 @@ header {
     color: #fff;
     box-shadow: 0 0 20px rgba(244, 114, 182, 0.4);
 }
+
 .btn-primary:hover { transform: translateY(-5px); box-shadow: 0 0 40px rgba(244, 114, 182, 0.6); }
 
 .btn-secondary {
@@ -164,9 +152,7 @@ header {
 }
 .btn-secondary:hover { border-color: var(--neon-blue); color: var(--neon-blue); }
 
-/* =========================================
-   5. البطاقات (مطابقة للصورة)
-   ========================================= */
+/* البطاقات */
 .section { padding: 100px 5%; }
 .section-title {
     text-align: center;
@@ -182,35 +168,29 @@ header {
     gap: 30px;
 }
 
-/* تصميم البطاقة الزجاجي كما في الصورة */
 .card {
     background: var(--glass);
-    padding: 50px 30px;
+    padding: 40px 30px;
     border-radius: 20px;
     border: 1px solid var(--border);
     text-align: center;
-    transition: transform 0.1s;
+    transition: transform 0.1s; /* JS Tilt */
     transform-style: preserve-3d;
 }
 
-/* الأيقونات المتدرجة */
 .icon-box {
-    font-size: 3rem;
-    margin-bottom: 25px;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
     background: linear-gradient(to bottom, var(--neon-blue), var(--neon-purple));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    display: inline-block;
 }
 
-.card h3 { font-family: var(--font-heading); margin-bottom: 15px; font-size: 1.5rem; }
-.card p { color: #94a3b8; font-size: 0.95rem; }
+.card h3 { font-family: var(--font-heading); margin-bottom: 15px; font-size: 1.4rem; }
+.card p { color: #94a3b8; }
 
-/* =========================================
-   6. API Section (للمطورين)
-   ========================================= */
+/* API Section */
 .api-wrapper { max-width: 800px; margin: 0 auto; }
-
 .api-card {
     background: #000;
     border-radius: 15px;
@@ -218,6 +198,7 @@ header {
     padding: 25px;
     position: relative;
 }
+/* خط نيون جانبي */
 .api-card::before {
     content: ''; position: absolute; top: 10%; right: 0;
     width: 4px; height: 80%;
@@ -241,6 +222,7 @@ header {
     border: 1px solid #222;
     direction: ltr;
 }
+
 .code-box code {
     color: var(--neon-pink);
     font-family: var(--font-code);
@@ -249,12 +231,11 @@ header {
     margin-right: 15px;
     scrollbar-width: none;
 }
+
 .copy-btn { background: transparent; border: none; color: #666; cursor: pointer; font-size: 1.2rem; }
 .copy-btn:hover { color: var(--neon-blue); }
 
-/* =========================================
-   7. المطور والفوتر
-   ========================================= */
+/* المطور */
 .dev-card {
     text-align: center;
     background: linear-gradient(145deg, #1e1b4b, #0f172a);
@@ -286,34 +267,27 @@ header {
 }
 .socials a:hover { background: var(--neon-pink); transform: scale(1.1); }
 
-footer { text-align: center; padding: 40px; color: #666; margin-top: 50px; }
-footer i { color: var(--neon-pink); animation: pulse 1s infinite; }
+/* Animations Classes */
+/* مهم: نجعل العنصر شفافاً في البداية */
+.reveal { 
+    opacity: 0; 
+    transform: translateY(30px); 
+    transition: 1s all ease; 
+}
+
+/* عندما نضيف كلاس active يظهر العنصر */
+.reveal.active { 
+    opacity: 1; 
+    transform: translateY(0); 
+}
+
+.pulse { animation: pulse 1.5s infinite; color: var(--neon-pink); }
 @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
-
-/* =========================================
-   ⚠️ الإصلاح النهائي: إظهار العناصر دائماً
-   ========================================= */
-
-/* إجبار العناصر على الظهور فوراً لمنع مشاكل الاختفاء */
-.reveal, .card, .api-wrapper, .dev-card, .hero-content, header {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-    visibility: visible !important;
-}
-
-/* حركة دخول بسيطة للهيرو فقط عند التحميل */
-.hero-content {
-    animation: fadeInUp 1s ease-out forwards;
-}
-
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
 
 /* الموبايل */
 @media (max-width: 768px) {
     header { width: 95%; top: 10px; }
     .nav-links { display: none; }
     .hero h1 { font-size: 3rem; }
+    .card { padding: 30px 20px; }
 }
