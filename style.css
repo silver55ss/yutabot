@@ -1,81 +1,325 @@
-/* متغيرات الألوان */
+/* =========================================
+   1. إعدادات عامة ومتغيرات الألوان
+   ========================================= */
 :root {
-    --bg-color: #0a0a0a;
-    --card-bg: #111;
-    --text-color: #e0e0e0;
-    --accent-color: #9d4edd; /* بنفسجي فاتح */
-    --code-bg: #1e1e1e;
-    --success: #00c853;
+    --bg-color: #050505;        /* أسود عميق */
+    --card-bg: #111111;         /* رمادي داكن جداً للبطاقات */
+    --text-color: #e0e0e0;      /* أبيض مريح للعين */
+    --accent-color: #9d4edd;    /* اللون البنفسجي الأساسي (طاقة يوتا) */
+    --accent-glow: rgba(157, 78, 221, 0.4); /* توهج بنفسجي */
+    --code-bg: #1e1e1e;         /* خلفية الأكواد */
+    --success: #00e676;         /* لون النجاح (للـ GET) */
+    --font-main: 'Tajawal', sans-serif;
+    --font-code: 'Fira Code', monospace;
 }
 
-/* تنسيقات خاصة بقسم الـ API */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* =========================================
+   2. القائمة العلوية (Header & Nav)
+   ========================================= */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 15px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(5, 5, 5, 0.85); /* خلفية نصف شفافة */
+    backdrop-filter: blur(10px);      /* تأثير الزجاج */
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 1px;
+    font-family: var(--font-code);
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: 1.1rem;
+    transition: 0.3s;
+    position: relative;
+}
+
+.nav-links a:hover {
+    color: var(--accent-color);
+}
+
+/* تأثير خط تحت الروابط عند التمرير */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    right: 0;
+    background-color: var(--accent-color);
+    transition: width 0.3s;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* =========================================
+   3. القسم الرئيسي (Hero Section)
+   ========================================= */
+.hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* تدرج لوني غامض في الخلفية */
+    background: radial-gradient(circle at 50% 50%, #1a0b2e 0%, var(--bg-color) 70%);
+    padding: 0 20px;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.highlight {
+    color: var(--accent-color);
+    text-shadow: 0 0 20px var(--accent-glow);
+}
+
+.type-text {
+    font-size: 1.2rem;
+    color: #aaa;
+    margin-bottom: 40px;
+    min-height: 24px;
+}
+
+/* الأزرار */
+.buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* الزر الأساسي */
+.btn:not(.btn-outline) {
+    background: var(--accent-color);
+    color: #fff;
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.btn:not(.btn-outline):hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(157, 78, 221, 0.8);
+}
+
+/* زر الـ Outline */
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+}
+
+.btn-outline:hover {
+    background: var(--accent-color);
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+/* =========================================
+   4. قسم المميزات (Features)
+   ========================================= */
+.section {
+    padding: 80px 8%;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--accent-color);
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.feature-card {
+    background: var(--card-bg);
+    padding: 40px 30px;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: 0.3s;
+}
+
+.feature-card:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-10px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.feature-card .icon {
+    font-size: 3rem;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.feature-card p {
+    color: #888;
+}
+
+/* =========================================
+   5. قسم الـ APIs (التصميم البرمجي)
+   ========================================= */
 .dark-section {
-    background-color: #050505;
+    background-color: #020202; /* أغمق قليلاً من الخلفية العادية */
 }
 
 .api-container {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 25px;
 }
 
 .api-box {
-    background: var(--card-bg);
+    background: #0f0f0f;
     border: 1px solid #333;
+    border-right: 4px solid var(--accent-color);
     border-radius: 8px;
-    padding: 20px;
+    padding: 25px;
     position: relative;
-    border-right: 3px solid var(--accent-color); /* شريط جمالي */
+    overflow: hidden;
 }
 
 .api-header {
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .method {
-    font-family: 'Fira Code', monospace;
+    font-family: var(--font-code);
     font-weight: bold;
-    padding: 5px 10px;
+    padding: 4px 10px;
     border-radius: 4px;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
 }
 
 .method.get {
-    background: rgba(0, 200, 83, 0.2);
+    background: rgba(0, 230, 118, 0.15);
     color: var(--success);
+    border: 1px solid rgba(0, 230, 118, 0.3);
 }
 
 .endpoint {
-    font-family: 'Fira Code', monospace;
+    font-family: var(--font-code);
     color: #fff;
     font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.api-desc {
+    color: #aaa;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
 }
 
 .code-block {
     background: var(--code-bg);
     padding: 15px;
-    border-radius: 5px;
+    border-radius: 6px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 10px;
-    font-family: 'Fira Code', monospace;
-    color: #fab1a0; /* لون شبيه بألوان الكود */
-    font-size: 0.9rem;
+    font-family: var(--font-code);
+    color: #fab1a0; /* لون برتقالي فاتح للكود */
+    border: 1px solid #333;
+}
+
+.code-block code {
+    white-space: nowrap;
     overflow-x: auto;
+    padding-bottom: 2px;
+}
+
+/* تخصيص شريط التمرير للكود */
+.code-block code::-webkit-scrollbar {
+    height: 4px;
+}
+.code-block code::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
 }
 
 .copy-btn {
     background: transparent;
     border: none;
-    color: #fff;
+    color: #888;
     cursor: pointer;
     font-size: 1.2rem;
+    margin-right: 15px; /* مسافة بسبب RTL */
     transition: color 0.3s;
 }
 
@@ -83,42 +327,83 @@
     color: var(--accent-color);
 }
 
-/* تنسيقات الشبكة للمميزات */
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    padding: 0 20px;
-}
-
-.feature-card {
-    background: var(--card-bg);
-    padding: 30px;
-    border-radius: 15px;
+/* =========================================
+   6. قسم المطور والفوتر
+   ========================================= */
+.dev-card {
+    background: linear-gradient(45deg, #111, #1a0b2e);
+    padding: 50px;
+    border-radius: 20px;
     text-align: center;
-    transition: 0.3s;
-    border: 1px solid #222;
+    border: 1px solid #333;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-.feature-card:hover {
-    transform: translateY(-10px);
-    border-color: var(--accent-color);
-    box-shadow: 0 10px 30px rgba(157, 78, 221, 0.1);
-}
-
-.feature-card .icon {
-    font-size: 2.5rem;
-    color: var(--accent-color);
+.dev-info h2 {
     margin-bottom: 20px;
+    color: var(--accent-color);
 }
 
-/* زر إضافي */
-.btn-outline {
-    background: transparent;
-    border: 2px solid var(--accent-color);
-    margin-right: 10px;
+.socials {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
-.btn-outline:hover {
+.socials a {
+    color: #fff;
+    font-size: 1.2rem;
+    border: 1px solid #333;
+    padding: 10px 20px;
+    border-radius: 50px;
+    transition: 0.3s;
+    background: #000;
+}
+
+.socials a:hover {
     background: var(--accent-color);
+    border-color: var(--accent-color);
+    transform: translateY(-3px);
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    background: #000;
+    color: #666;
+    border-top: 1px solid #222;
+    margin-top: 50px;
+}
+
+/* =========================================
+   7. التجاوب مع الجوال (Mobile)
+   ========================================= */
+@media (max-width: 768px) {
+    header {
+        padding: 15px 20px;
+    }
+    
+    .nav-links {
+        display: none; /* يمكن إضافة قائمة هامبرغر لاحقاً */
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    .code-block {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-end; /* لمحاذاة زر النسخ */
+    }
+    
+    .code-block code {
+        width: 100%;
+    }
 }
