@@ -284,10 +284,48 @@ header {
 .pulse { animation: pulse 1.5s infinite; color: var(--neon-pink); }
 @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
 
-/* الموبايل */
+/* =========================================
+   تعديلات الجوال (Mobile Responsiveness)
+   ========================================= */
 @media (max-width: 768px) {
-    header { width: 95%; top: 10px; }
-    .nav-links { display: none; }
-    .hero h1 { font-size: 3rem; }
-    .card { padding: 30px 20px; }
+    /* تصغير عرض القائمة لتناسب الشاشة */
+    header { 
+        width: 100%; 
+        top: 0; 
+        padding: 10px; 
+    }
+
+    .glass-nav {
+        width: 100%;
+        border-radius: 0 0 20px 20px; /* جعلها مستطيلة من الأعلى */
+        padding: 10px 15px;
+        flex-direction: column; /* ترتيب الشعار والروابط فوق بعض */
+        gap: 10px;
+    }
+
+    /* هذا السطر كان يخفي الروابط، الآن نجعلها تظهر */
+    .nav-links { 
+        display: flex !important; 
+        gap: 15px; 
+        justify-content: center;
+        width: 100%;
+    }
+
+    /* تصغير الخط قليلاً للجوال */
+    .nav-links a {
+        font-size: 0.9rem;
+        padding: 5px;
+    }
+
+    .logo {
+        font-size: 1.3rem;
+    }
+
+    .hero {
+        margin-top: 100px; /* زيادة المسافة لأن القائمة أصبحت أطول */
+    }
+
+    .hero h1 { 
+        font-size: 2.8rem; 
+    }
 }
